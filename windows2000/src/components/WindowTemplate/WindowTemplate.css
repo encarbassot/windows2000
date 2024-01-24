@@ -1,0 +1,10 @@
+.WindowTemplate {
+  position: absolute;
+  height: 100px;
+  width: 199px;
+
+  top: 0;
+  left: 0;
+
+  background-color: white;
+}
