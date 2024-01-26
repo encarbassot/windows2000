@@ -1,10 +1,27 @@
 .WindowTemplate {
   position: absolute;
-  height: 100px;
-  width: 199px;
+  min-height: 100px;
+  min-width: 200px;
 
   top: 0;
   left: 0;
 
   background-color: white;
+
+  z-index: 100;
+
+  border: 1px solid black;
+}
+
+
+.WindowTemplate header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(47, 108, 170);
+  color: white;
+  padding-left: .5rem;
+
+  -webkit-user-select: none;
+  user-select: none;
 }

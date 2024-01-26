@@ -2,4 +2,5 @@
   background-color: #57a8a8;
   position: relative;
   height: 100dvh;
+  overflow: hidden;
 }

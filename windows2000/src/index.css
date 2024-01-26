@@ -1,4 +1,7 @@
 body {
   margin: 0;
   height: 100dvh;
+
+  overscroll-behavior-y: none;
+  /* Disables pull-to-refresh on some browsers */
 }

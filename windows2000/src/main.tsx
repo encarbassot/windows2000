@@ -1,10 +1,10 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
+import App from './App.jsx'
 import './index.css'
+import { WindowManagerProvider } from './context/WindowManagerContext.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+  <WindowManagerProvider>
     <App />
-  </React.StrictMode>,
+  </WindowManagerProvider>
 )
