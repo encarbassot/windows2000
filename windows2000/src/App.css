@@ -3,4 +3,12 @@
   position: relative;
   height: 100dvh;
   overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+}
+
+.App>.desktop {
+  flex: 1;
 }

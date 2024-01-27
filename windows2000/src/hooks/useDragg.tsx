@@ -1,5 +1,10 @@
 import React, { useEffect, useRef, useState } from "react"
 
+
+
+// body {overscroll-behavior-y: none;}
+/* Disables pull-to-refresh on some browsers */
+
 export default function useDrag(startX = 0, startY = 0): [number, number, React.MutableRefObject<null>] {
   const dragRef = useRef(null);
   const [x, setX] = useState(startX);

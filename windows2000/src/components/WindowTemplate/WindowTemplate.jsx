@@ -5,7 +5,7 @@ import useDrag from "../../hooks/useDragg"
 import { useWindowManagerContext } from "../../context/WindowManagerContext"
 
 
-export default function WindowTemplate({ children, title = "", onClose, onFocus,zindex }) {
+export default function WindowTemplate({ children, title = "", onClose, onFocus,zindex, minimized,maximized,onMinimize,onMaximize}) {
 
   // const { pop } = useWindowManagerContext()
 
@@ -15,11 +15,13 @@ export default function WindowTemplate({ children, title = "", onClose, onFocus,
   function handleMinimize(e) {
     e.preventDefault()
     e.stopPropagation()
+    onMinimize()
   }
 
   function handleMaximize(e) {
     e.preventDefault()
     e.stopPropagation()
+    onMaximize()
   }
 
   function handleClose(e) {
@@ -36,7 +38,7 @@ export default function WindowTemplate({ children, title = "", onClose, onFocus,
 
   return <div
     style={{ top: y, left: x, zIndex:zindex }}
-    className="WindowTemplate"
+    className={"WindowTemplate" + (minimized?" minimized":"") + (maximized?" maximized":"")}
     onDoubleClick={handleMaximize}
     onMouseDown={handleFocus}
   >
@@ -44,7 +46,7 @@ export default function WindowTemplate({ children, title = "", onClose, onFocus,
       <span>{title}</span>
       <nav>
         <button onClick={handleMinimize}>_</button>
-        <button onClick={handleMaximize}>[]</button>
+        <button onClick={handleMaximize}>{maximized?"□":"[]"}</button>
         <button onClick={handleClose}>X</button>
       </nav>
     </header>

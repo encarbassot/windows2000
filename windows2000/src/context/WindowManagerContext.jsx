@@ -15,11 +15,13 @@ export function WindowManagerProvider({ children }) {
   const [appList, setAppList] = useState([])
   const [z,setZ] = useState(0)
 
+
+  //add new app
   function pushApp(app) {
     if(typeof app === "string"){
       app = {component:app}
     }
-    const newApp = {...app, zindex:z}
+    const newApp = {...app, zindex:z,minimized:false,maximized:false}
     setZ(prev=>prev+1)
 
     
@@ -37,7 +39,6 @@ export function WindowManagerProvider({ children }) {
   function handleCloseWindow(i){
     setAppList(prev=>{
       const updated = [...prev]
-      // updated.splice(i,1)
       updated[i] = undefined
       return updated
     })
@@ -45,23 +46,42 @@ export function WindowManagerProvider({ children }) {
 
 
   function handleFocusWindow(i){
-    if(appList[i].zindex===z-1) return
+    
 
     setAppList(prev=>{
-      const updated = [...prev]
+      const updated = [...prev.map(x=>({...x,focus:false}))]
+
       updated[i].zindex = z
+      updated[i].focus = true
+      updated[i].minimized = false
       setZ(prevZ=>prevZ+1)
-      console.log(z)
       return updated
     })
   }
 
 
+  function handleMinimize(i){
+    setAppList(prev=>{
+      const updated = [...prev]
+      updated[i].minimized = !updated[i].minimized
+      console.log(updated)
+      return updated
+    })
+  }
+
+
+  function handleMaximize(i){
+    setAppList(prev=>{
+      const updated = [...prev]
+      updated[i].maximized = !updated[i].maximized
+      return updated
+    })
+  }
 
 
   return(
     <WindowManagerContext.Provider
-      value={{ appList, pushApp }}
+      value={{ appList, pushApp,handleFocusWindow }}
     >
       {appList.map((x,i)=>{
         if(!x || x.hide) return null
@@ -69,11 +89,12 @@ export function WindowManagerProvider({ children }) {
 
         return<WindowTemplate 
           {...props} 
-          title={i+" "+props.title}
           zindex={zindex+100}
           key={i} 
           onClose={()=>handleCloseWindow(i)}
           onFocus={()=>handleFocusWindow(i)}
+          onMinimize={()=>handleMinimize(i)}
+          onMaximize={()=>handleMaximize(i)}
         >
           {component}
         </WindowTemplate>
