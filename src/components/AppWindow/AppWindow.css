@@ -1,17 +1,48 @@
 .AppWindow {
-  border: 2px solid white;
+  position: absolute;
+  background-color: var(--gray);
 
-  min-width: 200px;
-  min-height: 200px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--dark-gray) black black var(--dark-gray);
+
+
 }
 
-.AppWindow>header {
-  background-color: #282c34;
-  color: white;
-  padding: 10px;
+.AppWindow.maximized {
+  top: 0 !important;
+  left: 0 !important;
+  bottom: 0 !important;
+  right: 0 !important;
+}
+
+.AppWindow--inner {
+  border-width: 1px;
+  border-style: solid;
+  border-color: white var(--dark-gray) var(--dark-gray) white;
+
+  padding: 2px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  height: 100%;
+
+  box-sizing: border-box;
+}
+
+.AppWindow>.AppWindow--inner>header {
+  height: 18px;
+
+  background-color: #808080;
 
   display: flex;
   align-items: center;
+  gap: 3px;
+  padding: 0 3px;
+
+  color: #c0c0c0;
+
 
 
   .title {
@@ -19,12 +50,70 @@
     font-size: 1.2em;
     font-weight: bold;
   }
+
+  .buttons {
+    display: flex;
+    height: 100%;
+    gap: 3px;
+
+  }
+
+  .ActionButton,
+  .ActionButton img {
+    border: 0;
+    width: 16px;
+    height: 14px;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    box-sizing: border-box;
+  }
+
 }
 
-.AppWindow>.menu-bar {
+.AppWindow>.AppWindow--inner>header.focus {
+  background-color: var(--marine);
+  color: white;
+}
+
+.AppWindow>.AppWindow--inner>header .ico {
+  width: 16px;
+  height: 16px;
+}
+
+.AppWindow>.AppWindow--inner>.menu-bar {
   background-color: #c0c0c0;
 }
 
-.AppWindow>main {
+.AppWindow>.AppWindow--inner>main {
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--dark-gray) white white var(--dark-gray);
+
+  box-sizing: border-box;
+
+}
+
+.AppWindow>.AppWindow--inner>main>.content--inner {
   background-color: white;
+
+  background-color: white;
+
+  border-width: 1px;
+  border-style: solid;
+  border-color: black var(--dark-gray) var(--dark-gray) black;
+
+  box-sizing: border-box;
+}
+
+.AppWindow.noWhiteBackground>.AppWindow--inner>main {
+  border: none;
+  background-color: var(--gray);
+  /* o el gris que prefieras */
+}
+
+.AppWindow.noWhiteBackground>.AppWindow--inner>main>.content--inner {
+  border: none;
+  background-color: var(--gray);
+  /* opcional, depende si quieres mantenerlo gris adentro también */
 }
