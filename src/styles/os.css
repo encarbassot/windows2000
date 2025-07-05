@@ -1,0 +1,45 @@
+.WindowBorder__outer {
+  border: 1px solid #ffffff;
+  box-shadow: inset -1px -1px 0 #808080, inset 1px 1px 0 #c0c0c0;
+  padding: 2px;
+  background-color: #c0c0c0;
+}
+
+.WindowBorder__inner {
+  border: 1px solid #808080;
+  box-shadow: inset -1px -1px 0 #ffffff, inset 1px 1px 0 #404040;
+  background-color: #d4d0c8;
+  padding: 4px;
+}
+
+/* Botones estilo Win2000 */
+button {
+  font-family: 'Tahoma', sans-serif;
+  font-size: 11px;
+  border: 1px solid #808080;
+  background-color: #d4d0c8;
+  padding: 2px 6px;
+  box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #404040;
+  cursor: pointer;
+}
+
+button:active {
+  box-shadow: inset -1px -1px 0 #ffffff, inset 1px 1px 0 #404040;
+}
+
+/* Enlaces estilo antiguo */
+a {
+  color: #0000ff;
+  text-decoration: underline;
+}
+
+/* Título de ventana */
+.titlebar {
+  background: linear-gradient(to right, #000080, #1084d0);
+  color: white;
+  padding: 2px 6px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
