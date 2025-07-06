@@ -16,6 +16,7 @@ import btn_unmaximize_hover_ico from "../../assets/sprites/window/unmaximize_hov
 import ActionButton from "./ActionButton"
 
 import defautIco from "../../assets/ICON/6.ico"
+import WindowMenus from "./WindowMenus"
 
 export default function AppWindow({ 
   children,
@@ -30,24 +31,20 @@ export default function AppWindow({
   allowClose = true,
   ico,
   noWhiteBackground = false,
+
+  isMinimized = false,
+  isMaximized = false,
+  setMinimized,
+  setMaximized,
   ...props 
 }) {
 
-
   const { closeApp } = useAppContext()
 
-  const [activeMenu, setActiveMenu] = useState(null)
   const [position, setPosition] = useState({ x: initialX, y: initialY })
   const dragging = useRef(false)
   const offset = useRef({ x: 0, y: 0 })
   const windowRef = useRef()
-
-  const [isMaximized,setIsMaximized] = useState(false)  
-
-  const toggleMenu = i => {
-    setActiveMenu(activeMenu === i ? null : i)
-  }
-
 
   const onMouseDown = e => {
     
@@ -82,17 +79,21 @@ export default function AppWindow({
 
 
 
+  function handleFocus(e) {
+    e.stopPropagation()
+    console.log("FOCUS")
+  }
 
   function handleClose(){
     closeApp(id)
   }
 
   function handleMinimize(){
-    
+    setMinimized(true)
   }
 
   function handleMaximize(){
-    setIsMaximized(!isMaximized)
+    setMaximized(!isMaximized)
   }
 
   return <>
@@ -103,6 +104,7 @@ export default function AppWindow({
         left: position.x,
         top: position.y
       }}
+      onMouseDown={handleFocus}
     >
       <div className="AppWindow--inner">
 
@@ -144,38 +146,8 @@ export default function AppWindow({
           </div>
         </header>
         
-        {menus.length > 0 && (
-          <nav className="menu-bar">
-            {menus.map((menu, i) => (
-              <div
-                key={i}
-                className={`menu ${activeMenu === i ? 'active' : ''}`}
-                onClick={() => toggleMenu(i)}
-                onBlur={() => setActiveMenu(null)}
-                tabIndex={0} // para permitir blur
-              >
-                <span className="menu-title">{menu.title}</span>
-                {activeMenu === i && (
-                  <div className="submenu">
-                    {menu.options.map((opt, j) => (
-                      <div
-                        key={j}
-                        className="menu-option"
-                        onClick={e => {
-                          e.stopPropagation()
-                          opt.action && opt.action()
-                          setActiveMenu(null)
-                        }}
-                      >
-                        {opt.title}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </nav>
-        )}
+
+        {menus.length > 0 && <WindowMenus menus={menus} />}
 
 
         <main className="content">
