@@ -1,0 +1,121 @@
+
+.Window__minesweeper{
+    background-color: #CCC;
+
+
+}
+
+
+.mine__header,
+.mine__grid{
+    border: 4px inset #DDD;
+    box-sizing: border-box;
+}
+
+/* **********HEADER*********** */
+.mine__header{
+    padding: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+
+.mine__header--face,
+.mine__header--settings{
+    width:52px;
+    height:52px;
+}
+
+.digit{
+    margin: auto 0;
+    float: left;
+    width: 26px;
+    height: 46px;
+}
+
+
+.mine__header--counter,
+.mine__header--timer{
+    background-color: black;
+    display: flex;
+    padding: 0 2px;
+}
+
+/* ***********GRID********** */
+
+.mine__grid{
+    display: grid;
+    gap: 0;
+
+    grid-template-columns: repeat(9, 32px);
+}
+
+.mine__cell{
+    height: 32px;
+    width: 32px;
+    
+    display: inline;
+}
+
+
+.mine__cell:hover{
+    -webkit-filter: brightness(85%);
+    filter: brightness(85%);
+    -webkit-transition: all 10ms ease;
+    -moz-transition: all 10ms ease;
+    -o-transition: all 10ms ease;
+    -ms-transition: all 10ms ease;
+    transition: all 10ms ease;
+}
+
+
+
+
+/* *************SPRITES************* */
+
+/* CELLS */
+.mine__cell.blank{background-position: 0 -78px;}
+.mine__cell.open0{background-position: 0 -46px;}
+.mine__cell.open1{background-position: -32px -46px;}
+.mine__cell.open2{background-position: -64px -46px;}
+.mine__cell.open3{background-position: -96px -46px;}
+.mine__cell.open4{background-position: -128px -46px;}
+.mine__cell.open5{background-position: -160px -46px;}
+.mine__cell.open6{background-position: -192px -46px;}
+.mine__cell.open7{background-position: -224px -46px;}
+.mine__cell.open8{background-position: -256px -46px;}
+.mine__cell.bombflagged{background-position:-32px -78px;}
+.mine__cell.bombdeath{background-position:-64px -78px;}
+.mine__cell.bombmisflagged{background-position:-96px -78px;}
+.mine__cell.bombrevealed{background-position:-128px -78px;}
+.mine__cell.question{background-position:-160px -78px;}
+.mine__cell.questionpressed{background-position:-192px -78px;}
+
+
+/* FACES */
+.mine__header--face.facesmile{background-position:0 -110px;}
+.mine__header--face.faceooh{background-position:-104px -110px;}
+.mine__header--face.facedead{background-position:-156px -110px;}
+.mine__header--face.facewin{background-position:-208px -110px;}
+
+/* .mine__header--face.facepressed{background-position:-52px -110px;} */
+.mine__header--face:active{background-position:-52px -110px;}
+
+/* COUNTER DIGITS */
+.digit.num0{background-position:0 0;}
+.digit.num1{background-position:-26px 0;}
+.digit.num2{background-position:-52px 0;}
+.digit.num3{background-position:-78px 0;}
+.digit.num4{background-position:-104px 0;}
+.digit.num5{background-position:-130px 0;}
+.digit.num6{background-position:-156px 0;}
+.digit.num7{background-position:-182px 0;}
+.digit.num8{background-position:-208px 0;}
+.digit.num9{background-position:-234px 0;}
+.digit.num-{background-position:-260px 0;}
+
+/* BUTTONS */
+.mine__header--settings{background-position: -156px -162px;}
+.mine__header--settings:active{background-position: -208px -162px;}

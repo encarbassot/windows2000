@@ -13,7 +13,7 @@
 }
 
 /* Botones estilo Win2000 */
-button {
+.button {
   font-family: 'Tahoma', sans-serif;
   font-size: 11px;
   border: 1px solid #808080;

@@ -1,22 +1,26 @@
 import AppWindow from '../../components/AppWindow/AppWindow';
+import AppModel from '../../Models/AppModel';
 import './Calculator.css';
 
-import { useState } from 'react'
+import { useState, useImperativeHandle, forwardRef, useRef } from 'react'
 
 
-  
-export default function Calculator({...props}) {
+
+const Calculator = forwardRef(({...props},ref) => {
   const [input, setInput] = useState('')
 
+  const clear = () => {
+    setInput('')
+  }
 
-  const menus = [
-    {
-      title: 'File',
-      options: [
-        { title: 'test', action: ()=>setInput(101010) }
-      ]
-    }
-  ]
+  const focus = () => {
+    console.log('focus!')
+  }
+
+  useImperativeHandle(ref, () => ({
+    clear,
+    focus
+  }))
 
 
   const handleClick = val => setInput(input + val)
@@ -37,31 +41,60 @@ export default function Calculator({...props}) {
   ]
 
   return (
-    <AppWindow
-      title="Calculator"
-      menus={menus}
-      {...props}
-    >
-      <div className="Calculator">
-        <input className="display" value={input} readOnly />
-        <div className="keys">
-          {buttons.map((b, i) => (
-            <button
-              key={i}
-              onClick={() => b === '=' ? handleEval() : handleClick(b)}
-              className={b === '=' ? 'equals' : ''}
-            >
-              {b}
-            </button>
-          ))}
-          <button className="clear" onClick={handleClear}>C</button>
-        </div>
+
+    <div className="Calculator__app">
+      <input className="display" value={input} readOnly />
+      <div className="keys">
+        {buttons.map((b, i) => (
+          <button
+            key={i}
+            onClick={() => b === '=' ? handleEval() : handleClick(b)}
+            className={"button "+(b === '=' ? 'equals' : '')}
+          >
+            {b}
+          </button>
+        ))}
+        <button className="clear" onClick={handleClear}>C</button>
       </div>
-    </AppWindow>
+    </div>
   )
 
-}
+})
   
+
+export default (props)=> new AppModel({
+  title: 'Calculator',
+  // icon: ,
+  component: Calculator,
+  description: 'A simple calculator app',
+  noWhiteBackground: true,
+  menus: (ref)=>[
+    {
+      title: 'Edit',
+      menus: [
+        {
+          title: 'Clear',
+          action: () => ref?.current?.clear()
+        }
+      ]
+    },
+    {
+      title: 'View',
+      menus: [
+        {
+          title: 'Focus',
+          menus:[
+            {
+              title: 'Focus Calculator',
+              action: () => ref?.current?.focus()
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  ...props
+})
 
 
 
