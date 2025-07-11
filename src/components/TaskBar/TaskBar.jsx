@@ -6,6 +6,7 @@ import startBtnIco from "../../assets/start.png"
 import startBtnOpenIco from "../../assets/start_down.png"
 import { useAppContext } from '../../context/AppContext';
 import Clock from './Clock';
+import { StartMenu } from './StartMenu/StartMenu';
   
 export default function TaskBar() {
 
@@ -22,7 +23,10 @@ export default function TaskBar() {
       <button className='startbtn' onClick={()=>setMenuOpen(!menuIsOpen)}>
         <img src={menuIsOpen ? startBtnOpenIco : startBtnIco } alt="Start" />
       </button>
-      
+      {menuIsOpen && <StartMenu onClickOutside={()=>setMenuOpen(false)} />}
+
+      {/* <StartMenu /> */}
+
       <span className='spacer' />
 
       <div className='activeWindows'>
@@ -45,10 +49,7 @@ export default function TaskBar() {
                 <div className='inner'>
                   <img src={app.icon} alt={app.title} />
                   <span>
-                    {app.title.length>10 
-                      ? app.title.slice(0,7)+"..." 
-                      : app.title
-                    }
+                    {app.title || ""}
                   </span>
 
                 </div>

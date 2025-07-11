@@ -1,17 +1,18 @@
 import { useState, useEffect } from 'react'
+import moment from 'moment'
 
 const Clock = () => {
-  const [time, setTime] = useState(new Date())
+  const [time, setTime] = useState(moment())
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTime(new Date())
+      setTime(moment())
     }, 1000)
 
     return () => clearInterval(interval)
   }, [])
 
-  return <span className='clock'>{time.toLocaleTimeString()}</span>
+  return <span className='clock'>{time.format('HH:mm:ss DD/MM/YYYY')}</span>
 }
 
 export default Clock
