@@ -1,10 +1,10 @@
 /* src/apps/calculator/Calculator.css */
-.Calculator__app {
+.Calculator__app.basic {
   padding: 1rem;
   width: 200px;
 }
 
-.Calculator__app .display {
+.Calculator__app.basic .display {
   width: 100%;
   height: 2rem;
   margin-bottom: .5rem;
@@ -15,25 +15,73 @@
   font-family: 'Courier New', Courier, monospace;
 }
 
-.Calculator__app .keys {
+.Calculator__app.basic .keys {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: .25rem;
 }
 
-.Calculator__app button {
+.Calculator__app.basic button {
   padding: .5rem;
   font-size: 1.1rem;
   cursor: pointer;
 }
 
-.Calculator__app .equals {
+.Calculator__app.basic .equals {
   background: #5cb85c;
   color: white;
 }
 
-.Calculator__app .clear {
+.Calculator__app.basic .clear {
   grid-column: span 4;
   background: #d9534f;
   color: white;
+}
+
+
+
+
+/* ------------------------ BINARY ------------------------ */
+
+.Calculator__app.binary input {
+  text-align: right;
+}
+
+.Calculator__app.binary .loader {
+  display: flex;
+  justify-content: space-around;
+
+  button.a {
+    border: 2px solid purple;
+    color: purple;
+  }
+
+  button.b {
+    border: 2px solid green;
+    color: green;
+  }
+}
+
+.Calculator__app.binary .header {
+  display: flex;
+  gap: 1rem;
+
+
+  .register.a input {
+    border: 2px solid purple;
+  }
+
+  .register.b input {
+    border: 2px solid green;
+  }
+}
+
+.Calculator__app.binary .actions {
+  display: flex;
+  justify-content: space-between;
+
+  button.active {
+    background: #5cb85c;
+    color: white;
+  }
 }

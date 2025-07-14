@@ -3,61 +3,33 @@ import AppModel from '../../Models/AppModel';
 import './Calculator.css';
 
 import { useState, useImperativeHandle, forwardRef, useRef } from 'react'
+import Calculator_basic from './extra/Calculator_basic';
+import { Calculator_time_intervals } from './extra/Calculator_time';
+import Calculator_binary from './extra/Calculator_binary';
 
+
+const TYPES = {
+  BASIC: 'basic',
+  DATE_INTERVALS: 'date_intervals',
+  BINARY: 'binary',
+}
 
 
 const Calculator = forwardRef(({...props},ref) => {
-  const [input, setInput] = useState('')
 
-  const clear = () => {
-    setInput('')
-  }
+  const [type, setType] = useState(TYPES.BASIC)
 
-  const focus = () => {
-    console.log('focus!')
+  const changeType = (x) => {
+    setType(x)
   }
 
   useImperativeHandle(ref, () => ({
-    clear,
-    focus
+    changeType
   }))
 
-
-  const handleClick = val => setInput(input + val)
-  const handleClear = () => setInput('')
-  const handleEval = () => {
-    try {
-      setInput(eval(input).toString())
-    } catch {
-      setInput('Error')
-    }
-  }
-
-  const buttons = [
-    '7','8','9','/',
-    '4','5','6','*',
-    '1','2','3','-',
-    '0','.','=','+'
-  ]
-
-  return (
-
-    <div className="Calculator__app">
-      <input className="display" value={input} readOnly />
-      <div className="keys">
-        {buttons.map((b, i) => (
-          <button
-            key={i}
-            onClick={() => b === '=' ? handleEval() : handleClick(b)}
-            className={"button "+(b === '=' ? 'equals' : '')}
-          >
-            {b}
-          </button>
-        ))}
-        <button className="clear" onClick={handleClear}>C</button>
-      </div>
-    </div>
-  )
+  if(type === TYPES. BASIC) return <Calculator_basic />
+  if(type === TYPES.DATE_INTERVALS) return <Calculator_time_intervals />
+  if(type === TYPES.BINARY) return <Calculator_binary />
 
 })
   
@@ -70,23 +42,16 @@ export default (props)=> new AppModel({
   noWhiteBackground: true,
   menus: (ref)=>[
     {
-      title: 'Edit',
-      menus: [
-        {
-          title: 'Clear',
-          action: () => ref?.current?.clear()
-        }
-      ]
-    },
-    {
       title: 'View',
       menus: [
+        {title:"Basic", action: () => ref?.current?.changeType(TYPES.BASIC)},
+        {title:"Binary", action: () => ref?.current?.changeType(TYPES.BINARY)},
         {
-          title: 'Focus',
+          title: 'Date',
           menus:[
             {
-              title: 'Focus Calculator',
-              action: () => ref?.current?.focus()
+              title: 'Intervals',
+              action: () => ref?.current?.changeType(TYPES.DATE_INTERVALS),
             }
           ]
         }
