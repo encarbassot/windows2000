@@ -45,35 +45,71 @@ export default function AppWindow({
   const dragging = useRef(false)
   const offset = useRef({ x: 0, y: 0 })
   const windowRef = useRef()
-
-  const onMouseDown = e => {
-    
+  
+  
+  const onDragStart = e => {
     dragging.current = true
+    const point = e.touches ? e.touches[0] : e
+    const rect = windowRef.current.getBoundingClientRect()
+    // offset.current = {
+    //   x: e.nativeEvent.offsetX,
+    //   y: e.nativeEvent.offsetY
+    // }
     offset.current = {
-      x: e.nativeEvent.offsetX,
-      y: e.nativeEvent.offsetY
+      x: point.clientX - rect.left,
+      y: point.clientY - rect.top
     }
-    e.preventDefault()
   }
 
-  const onMouseMove = e => {
-    if (!dragging.current) return
-    setPosition({
-      x: e.clientX - offset.current.x,
-      y: e.clientY - offset.current.y
-    })
-  }
-
-  const onMouseUp = () => {
-    dragging.current = false
-  }
-
+  
   useEffect(() => {
+
+    const onMouseMove = e => {
+      if (!dragging.current) return
+      setPosition({
+        x: e.clientX - offset.current.x,
+        y: e.clientY - offset.current.y
+      })
+    }
+  
+    const onMouseUp = () => {
+      dragging.current = false
+    }
+
+
     window.addEventListener('mousemove', onMouseMove)
     window.addEventListener('mouseup', onMouseUp)
     return () => {
       window.removeEventListener('mousemove', onMouseMove)
       window.removeEventListener('mouseup', onMouseUp)
+    }
+  }, [])
+
+
+  useEffect(() => {
+    const handleMove = e => {
+      if (!dragging.current) return
+      const point = e.touches ? e.touches[0] : e
+      setPosition({
+        x: point.clientX - offset.current.x,
+        y: point.clientY - offset.current.y
+      })
+    }
+    
+    const handleEnd = () => {
+      dragging.current = false
+    }
+  
+    window.addEventListener('mousemove', handleMove)
+    window.addEventListener('mouseup', handleEnd)
+    window.addEventListener('touchmove', handleMove)
+    window.addEventListener('touchend', handleEnd)
+  
+    return () => {
+      window.removeEventListener('mousemove', handleMove)
+      window.removeEventListener('mouseup', handleEnd)
+      window.removeEventListener('touchmove', handleMove)
+      window.removeEventListener('touchend', handleEnd)
     }
   }, [])
 
@@ -108,7 +144,11 @@ export default function AppWindow({
     >
       <div className="AppWindow--inner">
 
-        <header onMouseDown={onMouseDown} className={"focus"}>
+        <header 
+          onMouseDown={onDragStart} 
+          onTouchStart={onDragStart}
+          className={"focus"}
+        >
           <img src={ico || defautIco} alt="" className="ico" />
           <span className="title pixelatedFont">{title || "App Window"}</span>
           <div className="buttons">

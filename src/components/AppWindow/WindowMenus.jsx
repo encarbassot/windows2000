@@ -4,7 +4,7 @@ import "./WindowMenus.css"
 
 export default function WindowMenus({menus = [], innerRef}){
 
-  const [activeMenu, setActiveMenu] = useState(null)
+  const [activeMenu, setActiveMenu] = useState(1)
   const menuRefs = useRef([])
 
   const toggleMenu = index => {
@@ -28,15 +28,13 @@ export default function WindowMenus({menus = [], innerRef}){
             if (item.action) handleAction(() => item.action(innerRef), e)
           }}
         >
-          <div className="menu-label-with-arrow">
-            {item.title}
-            {item.menus && <span className="submenu-arrow">▶</span>}
-          </div>
-          {item.menus && (
-            <div className="submenu-wrapper">
-              {renderMenu(item.menus, depth + 1)}
+          <div className="submenu-wrapper">
+            <div className="menu-label-with-arrow">
+              {item.title}
+              {item.menus && <span className="submenu-arrow">▶</span>}
             </div>
-          )}
+            {item.menus && renderMenu(item.menus, depth + 1)}
+          </div>
         </div>
       ))}
     </div>

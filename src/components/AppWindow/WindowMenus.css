@@ -3,43 +3,92 @@
   gap: 1rem;
 }
 
+.WindowMenus .submenu-wrapper,
 .WindowMenus .menu {
   position: relative;
 }
 
-.WindowMenus .submenu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 10;
+.WindowMenus .menu-option:hover {
+  background-color: gray;
 }
 
-.WindowMenus .submenu-wrapper {
+.WindowMenus .submenu {
   position: absolute;
   top: 0;
   left: 100%;
-  background: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  max-width: 200px;
+  min-width: 50px;
+
+  background-color: white;
+  border: 1px solid #ccc;
+
+
+  display: flex;
+  flex-direction: column;
+
+  white-space: nowrap;
+  /* overflow: hidden; */
+  text-overflow: ellipsis;
+
+}
+
+.WindowMenus .submenu.depth-0 {
+  left: 0;
+  top: 100%;
+}
+
+.WindowMenus .submenu-wrapper .submenu {
+  top: 0;
+}
+
+
+
+
+
+
+
+/* mostrar los submenus sequencialmente con el hover */
+.WindowMenus .submenu {
+  display: none;
+}
+
+.WindowMenus .submenu-wrapper:hover>.submenu {
+  display: flex;
+}
+
+
+.WindowMenus .submenu.depth-0 {
+  display: flex;
+}
+
+
+
+
+/* APPEARENCE */
+
+.WindowMenus .submenu-arrow {
+  font-size: 10px;
+  margin-left: 10px;
+}
+
+.WindowMenus .submenu {
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: white gray gray white;
+  box-shadow: none;
 }
 
 .WindowMenus .menu-option {
-  padding: 4px 12px;
-  cursor: pointer;
-  white-space: nowrap;
+  padding: 4px 8px;
+  font-family: Tahoma, sans-serif;
+  font-size: 13px;
+  color: black;
+  cursor: default;
+  user-select: none;
 }
 
 .WindowMenus .menu-option:hover {
-  background-color: #eee;
-}
-
-.WindowMenus .menu-label-with-arrow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.WindowMenus .submenu-arrow {
-  margin-left: 8px;
+  background: navy;
+  color: white;
 }
