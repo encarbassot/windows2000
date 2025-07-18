@@ -6,6 +6,7 @@ import './Desktop.css';
 import Minesweeper from '../../Apps/Minesweeper/Minesweeper';
 import Pipes from '../../Screensavers/Pipes/Pipes';
 import Solitario from '../../Apps/Solitario/Solitario';
+import Chat from '../../Apps/Chat/Chat';
   
 export default function Desktop() {
 
@@ -19,7 +20,7 @@ export default function Desktop() {
 
     if(fistRun) {
       // appContext.addApp(Greeting)
-      appContext.addApp(Solitario)
+      appContext.addApp(Chat)
       setFirstRun(false)
     }
   }, [appContext])
@@ -29,6 +30,8 @@ export default function Desktop() {
     <div className='Desktop'>
       <button onClick={() => appContext.addApp(Calculator)}> Calc</button>
       <button onClick={() => appContext.addApp(Minesweeper)}> Busca Minas</button>
+      <button onClick={() => appContext.addApp(Solitario)}> Solitario</button>
+      <button onClick={() => appContext.addApp(Chat)}> Chat</button>
       <button onClick={()=>setIsScreenSaverActive(true)}>ScreenSaver</button>
       {isScreenSaverActive && <Pipes onActive={()=>setIsScreenSaverActive(false)}/>}
     </div>

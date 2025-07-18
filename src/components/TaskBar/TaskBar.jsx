@@ -14,7 +14,7 @@ export default function TaskBar() {
 
   useEffect(() => {
     if (!appContext.apps) return
-    console.log(appContext.apps)
+    // console.log(appContext.apps)
   }, [appContext?.apps])
 
   const [menuIsOpen,setMenuOpen] = useState(false)

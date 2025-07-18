@@ -27,7 +27,7 @@ export default function ActionButton({
       isPressed
       ?icoHover
       :ico
-    } alt />
+    } alt={alt} />
   </button>
 
 

@@ -1,0 +1,17 @@
+.win2000-chat {
+
+  background-color: white;
+}
+
+
+.win2000-chat ul,
+.win2000-chat li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.win2000-chat .messages {
+  max-height: 300px;
+  overflow-y: auto;
+}

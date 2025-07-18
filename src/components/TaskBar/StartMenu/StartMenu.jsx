@@ -44,7 +44,6 @@ import AppModel from '../../../Models/AppModel.jsx';
 import Minesweeper from '../../../Apps/Minesweeper/Minesweeper.jsx';
 import Solitario from '../../../Apps/Solitario/Solitario.jsx';
 import { useAppContext } from '../../../context/AppContext.jsx';
-console.log(Calculator)
 
 const startMenuConfig = [
   {ico: ico_Update, name: 'Windows Update', spacerAfter:true},
