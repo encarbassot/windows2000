@@ -38,16 +38,30 @@ import { useEffect, useRef, useState } from 'react'
 
 import {Ico_Arrow} from '../../../assets/sprites/sprites.tsx'
 
+import Calculator from '../../../Apps/Calculator/Calculator.jsx';
+
+import AppModel from '../../../Models/AppModel.jsx';
+import Minesweeper from '../../../Apps/Minesweeper/Minesweeper.jsx';
+import Solitario from '../../../Apps/Solitario/Solitario.jsx';
+import { useAppContext } from '../../../context/AppContext.jsx';
+console.log(Calculator)
+
 const startMenuConfig = [
   {ico: ico_Update, name: 'Windows Update', spacerAfter:true},
   {ico: ico_Programas, name: 'Programas', children: [
     {ico: ico_Accesorios, name: 'Accesorios'
     , children: [
-      {ico: ico_Accesorios, name: 'Calculadora'},
+      Calculator,
       {ico: ico_Accesorios, name: 'Bloc de notas'},
       {ico: ico_Accesorios, name: 'Paint'},
       {ico: ico_Accesorios, name: 'Grabadora de sonidos'},
       {ico: ico_Accesorios, name: 'Terminal de comandos'},
+    ]
+    },
+    {ico: ico_Accesorios, name: 'Juegos'
+    , children: [
+      Minesweeper,
+      Solitario
     ]
     },
     {ico: ico_Accesorios, name: 'Inicio'},
@@ -117,6 +131,25 @@ export function StartMenu({ onClickOutside }){
 
 
 function RowRecursive({ item }) {
+  const appContext = useAppContext()
+
+
+  const app = typeof item === 'function' ? item() : item
+
+  const isApp = app instanceof AppModel
+  
+  if (isApp){
+
+    return (
+      <div className='rowContainer'>
+        <div className='row' onClick={() => appContext.addApp(item) } >
+          <img src={app.icon} alt="" />
+          <span className='main'>{app.title}</span>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className='rowContainer'>
       <div className='row'>

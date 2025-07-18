@@ -60,6 +60,7 @@ export default class AppModel{
         ico={this.icon} 
         title={this.title} 
         menus={m} 
+        id={id}
         
         isMaximized={this.isMaximized}
         isMinimized={this.isMinimized}

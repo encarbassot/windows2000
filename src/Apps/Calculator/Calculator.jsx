@@ -56,32 +56,6 @@ export default (props)=> new AppModel({
           ]
         }
       ]
-    },
-    {
-      title: "Test",
-      menus: [
-        {
-          title: "Test Action",
-          action: () => console.log("Test action triggered")
-        },
-        {
-          title: "Another Menu",
-          menus: [
-            { title: "Submenu Item 1", 
-              menus:[
-                {title:"A"},
-                {title:"B"},
-              ]
-            },
-            { title: "Submenu Item 2", 
-              menus:[
-                {title:"A"},
-                {title:"B"}
-              ]
-            }
-          ]
-        }
-      ]
     }
   ],
   ...props

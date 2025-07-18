@@ -10,14 +10,16 @@ import { StartMenu } from './StartMenu/StartMenu';
   
 export default function TaskBar() {
 
-  const {apps} = useAppContext()
+  const appContext = useAppContext()
+
+  useEffect(() => {
+    if (!appContext.apps) return
+    console.log(appContext.apps)
+  }, [appContext?.apps])
 
   const [menuIsOpen,setMenuOpen] = useState(false)
 
-  useEffect(()=>{
-    console.log(apps)
-  },[apps])
-  
+
   return (
     <div className="TaskBar">
       <button className='startbtn' onClick={()=>setMenuOpen(!menuIsOpen)}>
@@ -31,7 +33,7 @@ export default function TaskBar() {
 
       <div className='activeWindows'>
         {
-          apps && apps.map((app,i)=>{
+          appContext.apps && appContext.apps.map((app,i)=>{
 
 
             function handleMinimize(){

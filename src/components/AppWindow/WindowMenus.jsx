@@ -4,7 +4,7 @@ import "./WindowMenus.css"
 
 export default function WindowMenus({menus = [], innerRef}){
 
-  const [activeMenu, setActiveMenu] = useState(1)
+  const [activeMenu, setActiveMenu] = useState(null)
   const menuRefs = useRef([])
 
   const toggleMenu = index => {

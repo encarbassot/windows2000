@@ -1,0 +1,57 @@
+.Solitario {
+
+  min-width: 400px;
+  min-height: 400px;
+
+  background-color: #12355b;
+
+  overflow: hidden;
+
+}
+
+.Solitario .board {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.Solitario .Card {
+  position: absolute;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+
+
+  img {
+    width: 30%
+  }
+
+  img.reverse {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+
+
+
+
+
+/* BOARD SECTIONS */
+.Solitario .board .columns {
+  position: absolute;
+  /* top: 30px;
+  left: 0;
+  height: 100%; */
+
+  width: 100%;
+  background-color: red;
+
+  display: flex;
+  justify-content: space-around;
+}
+
+.Solitario .board .columns .column {
+  background-color: green;
+  min-height: 10px;
+  min-width: 10px;
+}

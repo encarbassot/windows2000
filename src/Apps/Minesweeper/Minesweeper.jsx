@@ -8,7 +8,7 @@ import assets from './minesweeper.png'
 
 import {SIZE_VALUES} from './constants'
 
-import React, { useEffect, useState } from 'react'
+import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react'
 import AppModel from '../../Models/AppModel'
 
 
@@ -78,7 +78,7 @@ function createBoard(columns,rows,difficulty){
 
 
 //libraries
-const Minesweeper = () => {
+const Minesweeper = forwardRef(({...props},ref) => {
   
   const [cells,setCells] = useState([])
   const [gameIsOver,setGameIsOver] = useState(false)
@@ -270,6 +270,11 @@ const Minesweeper = () => {
   }
 
 
+
+  useImperativeHandle(ref, () => ({
+    handleFaceClick
+  }))
+
   const backgroundImageStyle = { backgroundImage: `url(${assets})` }
 
   return<>
@@ -317,7 +322,7 @@ const Minesweeper = () => {
     </div>
   
   </>
-}
+})
 
 export default  (props) => new AppModel({
   title: "Minesweeper",
@@ -325,17 +330,17 @@ export default  (props) => new AppModel({
   component: Minesweeper,
   description: "A simple minesweeper game.",
   noWhiteBackground: true,
-  // menus: (ref) => [
-  //   {
-  //     title: 'Settings',
-  //     menus: [
-  //       {
-  //         title: 'Restart',
-  //         action: () => ref?.current?.handleFaceClick()
-  //       }
-  //     ]
-  //   }
-  // ],
+  menus: (ref) => [
+    {
+      title: 'Settings',
+      menus: [
+        {
+          title: 'Restart',
+          action: () => ref?.current?.handleFaceClick()
+        }
+      ]
+    }
+  ],
   ...props
 })
 
